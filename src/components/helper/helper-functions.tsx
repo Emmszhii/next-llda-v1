@@ -15,6 +15,11 @@ export const arrayOfMonths = [
   "Dec",
 ];
 
+export const lagunaCenterCoordinates = {
+  lat: 14.1791,
+  lng: 121.2391,
+};
+
 export const arrayOfMonthsColors = [
   "#C3DFE0",
   "#BCD979",

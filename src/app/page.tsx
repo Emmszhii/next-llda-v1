@@ -6,7 +6,7 @@ import LoadingBar from "../components/partials/loading/LoadingBar";
 import { dynamicImport } from "../components/helper/dynamicImport";
 
 const AboutMap = dynamicImport(
-  () => import("@/src/components/map/InteractiveMap"),
+  () => import("@/src/components/page/InteractiveMap"),
   {
     ssr: false,
     loading: () => <LoadingBar />,
