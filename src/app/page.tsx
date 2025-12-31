@@ -1,14 +1,17 @@
 "use client";
-import React from "react";
 import dynamic from "next/dynamic";
+import BarChart from "../components/page/BarChart";
 import Header from "../components/partials/Header";
+import LoadingBar from "../components/partials/loading/LoadingBar";
+import { dynamicImport } from "../components/helper/dynamicImport";
 
-const DynamicMap = dynamic(() => import("../components/map/InteractiveMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="bg-gray-300 h-full w-full rounded-md relative loading-bar overflow-hidden" />
-  ),
-});
+const AboutMap = dynamicImport(
+  () => import("@/src/components/map/InteractiveMap"),
+  {
+    ssr: false,
+    loading: () => <LoadingBar />,
+  }
+);
 
 export default function Home() {
   return (
@@ -45,7 +48,7 @@ export default function Home() {
           </div>
 
           <div className="relative overflow-hidden w-full h-150 rounded-md">
-            <DynamicMap />
+            <AboutMap />
           </div>
         </div>
       </div>
@@ -114,7 +117,7 @@ export default function Home() {
             </div>
             <div className="relative flex items-center gap-4">
               <label htmlFor="" className="w-50">
-                Compared by
+                Compared bys
               </label>
               <select className="bg-white border rounded-sm">
                 <optgroup label="Select stations">
@@ -124,6 +127,47 @@ export default function Home() {
                 </optgroup>
               </select>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-20">
+        <div className="container">
+          <div className="font-semibold text-center">
+            <h3 className="text-primary text-5xl max-w-200 mx-auto">
+              Water Quality Parameter Comparison Across Stations
+            </h3>
+            <p className="max-w-150 mx-auto my-5">
+              Laguna Lake Development Authority Monitoring Stations
+            </p>
+          </div>
+          <div>
+            <ul className="grid grid-cols-2 gap-10">
+              <li>
+                <BarChart />
+              </li>
+              <li>
+                <BarChart title="pH Level Comparison" measurement="pH Units" />
+              </li>
+              <li>
+                <BarChart
+                  title="Biochemical Oxygen Demand (BOD)"
+                  measurement="mg/L"
+                />
+              </li>
+              <li>
+                <BarChart
+                  title="Chemical Oxygen Demand (COD)"
+                  measurement="mg/L"
+                />
+              </li>
+              <li>
+                <BarChart title="Turbidity Levels" measurement="NTU" />
+              </li>
+              <li>
+                <BarChart title="Nitrate Concentration" measurement="mg/L" />
+              </li>
+            </ul>
           </div>
         </div>
       </div>
