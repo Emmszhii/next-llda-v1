@@ -116,8 +116,8 @@ export default function Home() {
               </select>
             </div>
             <div className="relative flex items-center gap-4">
-              <label htmlFor="" className="w-50">
-                Compared bys
+              <label htmlFor="" className="w-60">
+                Compared by
               </label>
               <select className="bg-white border rounded-sm">
                 <optgroup label="Select stations">
@@ -127,19 +127,6 @@ export default function Home() {
                 </optgroup>
               </select>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="pt-20">
-        <div className="container">
-          <div className="font-semibold text-center">
-            <h3 className="text-primary text-5xl max-w-200 mx-auto">
-              Water Quality Parameter Comparison Across Stations
-            </h3>
-            <p className="max-w-150 mx-auto my-5">
-              Laguna Lake Development Authority Monitoring Stations
-            </p>
           </div>
           <div>
             <ul className="grid grid-cols-2 gap-10">

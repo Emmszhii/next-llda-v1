@@ -53,7 +53,7 @@ body {
 
 @layer utilities {
   .container {
-    @apply max-w-300 mx-auto;
+    @apply max-w-300 mx-auto px-4;
   }
   .loading-bar::after {
     @apply content-[''] absolute top-0 left-0 w-[180%] h-full bg-linear-to-r from-transparent via-[#eeeeee] to-transparent animate-loading;

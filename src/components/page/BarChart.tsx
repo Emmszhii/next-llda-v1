@@ -22,31 +22,57 @@ const ChartLoading = dynamic(
 );
 
 const BarChart = ({
-  barType = "bar",
   title = "Dissolved Oxygen (DO) Levels",
   measurement = "mg/L",
 }) => {
-  const arr = Array.from({ length: 12 }).map(() =>
-    Number(Math.random() * 20).toFixed(2)
+  const arrData = Array.from({ length: 6 }).map(
+    (val, i) =>
+      `LLDA-${i + 1 < 10 ? `00${i + 1}` : i + 1 < 100 ? `0${i + 1}` : i + 1}`
   );
 
+  const arr = Array.from({ length: 6 }).map(() =>
+    Number(Math.random() * 10).toFixed(2)
+  );
+
+  const arrByStatus = [
+    {
+      title: `Good (> 5)`,
+      bgcolor: `#4CB04F`,
+      data: arr.map((item) => (Number(item) > 5 ? Number(item) : 0)),
+    },
+    {
+      title: `Moderate (> 2.5 && < 5)`,
+      bgcolor: `#FFC107`,
+      data: arr.map((item) =>
+        Number(item) >= 2.5 && Number(item) <= 5 ? Number(item) : 0
+      ),
+    },
+    {
+      title: `Poor (< 2.5)`,
+      bgcolor: "#F44336",
+      data: arr.map((item) => (Number(item) < 2.5 ? Number(item) : 0)),
+    },
+  ];
+
+  console.log(arrByStatus);
+
   const data = {
-    labels: arrayOfMonths,
-    datasets: [
-      {
-        label: title,
-        data: arr,
-        fill: false,
-        backgroundColor: arrayOfMonthsColors,
+    labels: arrData,
+    datasets: arrByStatus.map((item) => {
+      return {
+        label: item.title,
+        data: item.data,
+        backgroundColor: item.bgcolor,
         tension: 0.1,
-      },
-    ],
+      };
+    }),
   };
 
   const optionsChart = {
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        position: "bottom" as "bottom",
         labels: {
           color: "#000",
         },
@@ -70,7 +96,7 @@ const BarChart = ({
         borderRadius: 1,
         borderWidth: 1,
         borderColor: ["#c6a057"],
-        backgroundColor: () => {
+        backgroundColor: (value: any, context: any) => {
           return "#000";
         },
         formatter: (value: any, context: any) => {
@@ -88,9 +114,13 @@ const BarChart = ({
       },
     },
     scales: {
+      x: {
+        stacked: true,
+      },
       y: {
         // suggestedMin: 0,
         // suggestedMax: 100,
+        stacked: true,
         ticks: {
           callback: function (value: any, index: any, values: any) {
             return value.toLocaleString() + " " + measurement;
