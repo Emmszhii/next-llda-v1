@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-primary: #003366;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-poppins: var(--font-poppins);
+
+  --animate-loading: loading 1.5s ease-in-out infinite;
+
+  @keyframes loading {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* --background: #0a0a0a;
+    --foreground: #ededed; */
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins);
+}
+
+@layer base {
+  input,
+  select {
+    @apply h-8.75 border border-solid border-gray-300 p-2 rounded-lg w-full truncate bg-transparent outline-none;
+  }
+  select {
+    @apply text-xs h-8.75;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply max-w-300 mx-auto;
+  }
+  .loading-bar::after {
+    @apply content-[''] absolute top-0 left-0 w-[180%] h-full bg-linear-to-r from-transparent via-[#eeeeee] to-transparent animate-loading;
+  }
+}
