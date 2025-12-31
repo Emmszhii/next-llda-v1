@@ -1,9 +1,11 @@
 "use client";
-import dynamic from "next/dynamic";
 import BarChart from "../components/page/BarChart";
 import Header from "../components/partials/Header";
 import LoadingBar from "../components/partials/loading/LoadingBar";
 import { dynamicImport } from "../components/helper/dynamicImport";
+import MonitoringStations from "../components/page/MonitoringStations";
+import WaterParameter from "../components/page/WaterParameter";
+import Footer from "../components/partials/Footer";
 
 const AboutMap = dynamicImport(
   () => import("@/src/components/page/InteractiveMap"),
@@ -14,6 +16,18 @@ const AboutMap = dynamicImport(
 );
 
 export default function Home() {
+  const arrayValue = Array.from({ length: 6 }).map(() => {
+    const amount = Number(1 * 10).toFixed(2);
+    const status =
+      Number(amount) > 5
+        ? 1
+        : Number(amount) >= 2.5 && Number(amount) <= 5
+        ? 2
+        : 3;
+
+    return { status, amount };
+  });
+
   return (
     <>
       <Header />
@@ -158,6 +172,36 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* MONITORING STATIONS */}
+      <div className="pt-20">
+        <div className="container">
+          <div className="bg-gray-200 px-6 py-8">
+            <div className="font-semibold">
+              <h3 className="text-primary text-2xl">Monitoring Stations</h3>
+            </div>
+            <div className="pt-6">
+              <MonitoringStations />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/*  */}
+      <div className="pt-0">
+        <div className="container">
+          <div className="px-6 py-8">
+            <div className="font-semibold">
+              <h3 className="text-primary text-2xl">
+                Water Quality Parameter Thresholds (DENR Standards)
+              </h3>
+            </div>
+            <div className="pt-6">
+              <WaterParameter />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </>
   );
 }
