@@ -1,13 +1,8 @@
 "use client";
-import React from "react";
-import { Chart as ChartJS, registerables, ChartType } from "chart.js";
+import { Chart as ChartJS, registerables } from "chart.js";
 import dynamic from "next/dynamic";
+import { numberWithCommasToFixed } from "../helper/helper-functions";
 import LoadingBar from "../partials/loading/LoadingBar";
-import {
-  arrayOfMonths,
-  arrayOfMonthsColors,
-  numberWithCommasToFixed,
-} from "../helper/helper-functions";
 // import { Bar } from "react-chartjs-2";
 
 ChartJS.register(...registerables);

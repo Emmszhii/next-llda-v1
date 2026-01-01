@@ -58,4 +58,19 @@ body {
   .loading-bar::after {
     @apply content-[''] absolute top-0 left-0 w-[180%] h-full bg-linear-to-r from-transparent via-[#eeeeee] to-transparent animate-loading;
   }
+  .burger_button {
+    @apply lg:hidden flex flex-col gap-1.5;
+  }
+  .burger_button span {
+    @apply block rounded-md h-1.5 w-11 bg-primary transition ease-in-out duration-200 cursor-pointer relative z-40;
+  }
+  .burger_button.active span:first-child {
+    @apply transform rotate-45 translate-y-3;
+  }
+  .burger_button.active span:nth-child(2) {
+    @apply opacity-0;
+  }
+  .burger_button.active span:last-child {
+    @apply transform -rotate-45 -translate-y-3;
+  }
 }

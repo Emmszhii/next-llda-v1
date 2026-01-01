@@ -38,12 +38,12 @@ export default function Home() {
           alt="banner.gif"
           className="w-full h-dvh bg-contain bg-repeat absolute top-0 z-1 brightness-50"
         />
-        <div className="flex w-full h-full items-center justify-center z-2 relative text-white text-center">
-          <div className="max-w-200 mx-auto ">
-            <h2 className="text-7xl font-bold leading-21">
+        <div className="flex w-full h-full items-center justify-center z-2 relative text-white text-center px-4">
+          <div className="max-w-200 mx-auto">
+            <h2 className="font-bold leading-21 text-[clamp(40px,6vw,72px)]">
               Visualize Laguna Lake's Water Quality
             </h2>
-            <p className="text-2xl leading-8 pt-10 font-semibold">
+            <p className="leading-8 pt-10 font-semibold text-[clamp(16px,3vw,24px)]">
               Interactive mapping and real-time monitoring for environmental
               awareness and data-driven decisions
             </p>
@@ -67,19 +67,19 @@ export default function Home() {
         </div>
       </div>
       {/*  */}
-      <div className="pt-20">
+      <div className="pt-20" id="about">
         <div className="container">
           <div className="font-semibold text-center">
             <h3 className="text-primary text-5xl">About</h3>
           </div>
           <div className="mt-10">
-            <div className="grid grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <img
                 src="/images/about.png"
                 alt="about.png"
                 className="w-full h-full bg-contain"
               />
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-between gap-4">
                 <p>
                   The Laguna Lake Development Authority (LLDA) is a government
                   agency in the Philippines responsible for the sustainable
@@ -116,7 +116,7 @@ export default function Home() {
             </p>
           </div>
           <hr />
-          <div className="my-5 mb-10 py-4 px-2 bg-gray-200 w-full flex items-center gap-5">
+          <div className="my-5 mb-10 py-4 px-2 bg-gray-200 w-full flex flex-col lg:flex-row items-start lg:items-center gap-5">
             <div className="relative flex items-center gap-4">
               <label htmlFor="" className="w-40">
                 Time Period
@@ -130,7 +130,7 @@ export default function Home() {
               </select>
             </div>
             <div className="relative flex items-center gap-4">
-              <label htmlFor="" className="w-60">
+              <label htmlFor="" className="w-48">
                 Compared by
               </label>
               <select className="bg-white border rounded-sm">
@@ -143,7 +143,7 @@ export default function Home() {
             </div>
           </div>
           <div>
-            <ul className="grid grid-cols-2 gap-10">
+            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <li>
                 <BarChart />
               </li>

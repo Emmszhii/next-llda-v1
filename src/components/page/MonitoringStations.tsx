@@ -25,7 +25,7 @@ const MonitoringStations = () => {
 
   return (
     <>
-      <ul className="flex flex-wrap justify-center gap-4">
+      <ul className="flex flex-wrap justify-start lg:justify-center gap-4">
         {arrayValue.map((item, key) => {
           // 1 is good
           // 2 is moderate

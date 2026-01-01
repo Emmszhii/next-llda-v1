@@ -24,7 +24,7 @@ const WaterParameter = () => {
 
   return (
     <>
-      <ul className="flex flex-wrap justify-center gap-4">
+      <ul className="flex flex-wrap justify-start lg:justify-center gap-4">
         {arrayValue.map((item, key) => {
           return (
             <li

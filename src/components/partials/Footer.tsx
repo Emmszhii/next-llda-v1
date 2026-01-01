@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <footer className="pt-10 pb-5">
         <div className="container">
-          <div className="flex items-start flex-col lg:flex-row lg:items-center lg:justify-between font-bold text-primary">
+          <div className="flex items-start flex-col lg:flex-row lg:items-center lg:justify-between font-bold text-primary gap-4">
             <span>
               Laguna Lake Development Authority © 2025 | Data Source: LLDA
               Monitoring Network
