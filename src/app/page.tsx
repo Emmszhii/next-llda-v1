@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { dynamicImport } from "../components/helper/dynamicImport";
 import BarChart from "../components/page/BarChart";
 import MonitoringStations from "../components/page/MonitoringStations";
@@ -6,6 +7,8 @@ import WaterParameter from "../components/page/WaterParameter";
 import Footer from "../components/partials/Footer";
 import Header from "../components/partials/Header";
 import LoadingBar from "../components/partials/loading/LoadingBar";
+import { setIsShow } from "../store/StoreAction";
+import { useStore } from "../store/StoreContext";
 
 const AboutMap = dynamicImport(
   () => import("@/src/components/page/InteractiveMap"),
@@ -16,17 +19,11 @@ const AboutMap = dynamicImport(
 );
 
 export default function Home() {
-  const arrayValue = Array.from({ length: 6 }).map(() => {
-    const amount = Number(1 * 10).toFixed(2);
-    const status =
-      Number(amount) > 5
-        ? 1
-        : Number(amount) >= 2.5 && Number(amount) <= 5
-        ? 2
-        : 3;
+  const { store, dispatch } = useStore();
 
-    return { status, amount };
-  });
+  React.useEffect(() => {
+    dispatch(setIsShow(false));
+  }, []);
 
   return (
     <>

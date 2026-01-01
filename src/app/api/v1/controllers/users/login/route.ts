@@ -3,6 +3,7 @@ import Users from "@/src/app/api/v1/models/Users";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
+import { getDataFromToken } from "../../../helpers/getDataFromToken";
 
 connectDatabase();
 // Calls the connect function to establish a connection to the database.
@@ -34,6 +35,7 @@ export async function POST(request: NextRequest) {
     }
     const tokenData = {
       id: user._id,
+      is_developer: false,
       ...user,
     };
 
@@ -56,5 +58,21 @@ export async function POST(request: NextRequest) {
     return response;
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    // Extract user ID from the authentication token
+    const userId = await getDataFromToken(request);
+
+    // Find the user in the database based on the user ID
+    const user = await Users.findOne({ _id: userId }).select("-users_password");
+    return NextResponse.json({
+      message: "User found",
+      data: user,
+    });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 }
