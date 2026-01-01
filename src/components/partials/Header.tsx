@@ -30,7 +30,7 @@ const Header = () => {
               <span className="inline-block">
                 Laguna Lake Development Authority{" "}
               </span>
-              <span className="inline-block ml-1">(LLDA)</span>
+              {/* <span className="inline-block ml-1">(LLDA)</span> */}
             </h1>
             <h1 className="font-bold lg:hidden">LLDA</h1>
           </div>

@@ -30,7 +30,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "src/app/about/page.tsx"
+    "src/app/about/page.tsx",
+    "src/components/helper/FormInputs.jsx"
   ],
   "exclude": ["node_modules"]
 }

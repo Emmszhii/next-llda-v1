@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {/* BANNER */}
       <div className="w-full h-[calc(100dvh-96px)] relative overflow-hidden">
         <img
@@ -200,7 +200,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

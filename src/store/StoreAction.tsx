@@ -36,3 +36,11 @@ export const setIsSearch = (val: boolean): StoreAction => ({
   type: "IS_SEARCH",
   is_search: val,
 });
+export const setIsLogin = (val: boolean): StoreAction => ({
+  type: "IS_LOGIN",
+  is_login: val,
+});
+export const setCredentials = (val: object): StoreAction => ({
+  type: "CREDENTIALS",
+  credentials: val,
+});

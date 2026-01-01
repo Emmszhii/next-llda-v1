@@ -8,6 +8,8 @@ export interface StoreState {
   restore: boolean;
   is_add: boolean;
   is_search: boolean;
+  is_login: boolean;
+  credentials: object;
 }
 
 export type StoreAction =
@@ -19,4 +21,6 @@ export type StoreAction =
   | { type: "DELETE"; delete: boolean }
   | { type: "RESTORE"; restore: boolean }
   | { type: "IS_ADD"; is_add: boolean }
+  | { type: "CREDENTIALS"; credentials: object }
+  | { type: "IS_LOGIN"; is_login: boolean }
   | { type: "IS_SEARCH"; is_search: boolean };

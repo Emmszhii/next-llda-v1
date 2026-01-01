@@ -10,6 +10,8 @@ export const initialState: StoreState = {
   restore: false,
   is_add: false,
   is_search: false,
+  is_login: false,
+  credentials: {},
 };
 
 export const StoreReducer = (state: StoreState, action: StoreAction) => {

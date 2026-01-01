@@ -14,6 +14,7 @@
   --font-mono: var(--font-geist-mono);
   --font-poppins: var(--font-poppins);
 
+  --animate-shake: shake 0.2s ease-in-out;
   --animate-loading: loading 1.5s ease-in-out infinite;
 
   @keyframes loading {
@@ -22,6 +23,23 @@
     }
     100% {
       transform: translateX(100%);
+    }
+  }
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(2px);
+    }
+    50% {
+      transform: translateX(-2px);
+    }
+    75% {
+      transform: translateX(2px);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 }
@@ -48,6 +66,63 @@ body {
   }
   select {
     @apply text-xs h-8.75;
+  }
+  input,
+  select {
+    @apply border border-solid border-gray-300 p-2 py-0 rounded-lg w-full h-8.75 truncate bg-transparent outline-none;
+  }
+  textarea {
+    @apply block border border-solid border-gray-300 p-2 rounded-lg w-full min-h-28 resize-y bg-transparent outline-none;
+  }
+  label {
+    @apply text-xs text-primary transform -translate-y-6 -translate-x-1 absolute left-3 top-4 px-1 z-5 isolate capitalize;
+  }
+  label:after {
+    @apply content-[''] w-[97%] h-[2.5px] absolute left-px top-[7.2px] bg-white -z-10;
+  }
+  input:disabled,
+  select:disabled,
+  textarea:disabled,
+  :disabled {
+    @apply bg-gray-100 border-gray-200 cursor-not-allowed hover:bg-gray-100 hover:text-inherit hover:border-gray-200;
+  }
+  input::file-selector-button {
+    @apply mr-5 border-0 bg-primary disabled:bg-gray-200 rounded-md text-white cursor-pointer px-1 py-0;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    @apply border border-solid border-primary outline-0;
+  }
+  input.account__password {
+    @apply border-0! border-b! rounded-none! focus:border-t-0! focus:border-r-0! focus:border-l-0!;
+  }
+
+  span.error-show {
+    @apply text-[11px] absolute right-1 -bottom-5 text-red-500 italic z-10;
+  }
+  input.error-show,
+  select.error-show,
+  textarea.error-show {
+    @apply border border-red-500 animate-shake;
+  }
+  label.error-show {
+    @apply text-red-500;
+  }
+}
+
+@layer components {
+  .btn-modal-submit {
+    @apply flex items-center justify-center text-white gap-2 px-3 py-1.5 bg-primary rounded-md border-primary border hover:bg-primary/80 hover:border-gray-300 duration-300 ease-in w-full;
+  }
+  .btn-modal-submit:disabled {
+    @apply opacity-50 hover:bg-primary hover:border-primary;
+  }
+  .btn-modal-cancel {
+    @apply flex items-center justify-center text-white gap-2 px-3 py-1.5 bg-white rounded-md border-gray-300 border w-full;
+  }
+  .btn-modal-cancel:disabled {
+    @apply opacity-50 hover:bg-primary/80 hover:border-gray-300;
   }
 }
 
