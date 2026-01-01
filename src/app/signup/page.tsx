@@ -19,16 +19,16 @@ export default function SignupPage() {
   const router = useRouter();
 
   const initVal = {
-    system_first_name: "",
-    system_last_name: "",
-    system_email: "",
-    system_password: "",
+    users_first_name: "",
+    users_last_name: "",
+    users_email: "",
+    users_password: "",
   };
   const yupSchema = Yup.object({
-    system_first_name: Yup.string().required("Required"),
-    system_last_name: Yup.string().required("Required"),
-    system_email: Yup.string().required("Required").email("Invalid email"),
-    system_password: Yup.string().required("Required"),
+    users_first_name: Yup.string().required("Required"),
+    users_last_name: Yup.string().required("Required"),
+    users_email: Yup.string().required("Required").email("Invalid email"),
+    users_password: Yup.string().required("Required"),
   });
 
   const queryClient = useQueryClient();
@@ -38,7 +38,7 @@ export default function SignupPage() {
         `/api/${devApiVersion}/controllers/system-users/signup`,
         values
       ),
-    onSuccess: (data: any) => {
+    onSuccess: (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["system-user"] });
       console.log(data.data.error);
@@ -86,7 +86,7 @@ export default function SignupPage() {
                       <InputText
                         label="First name"
                         type="text"
-                        name="system_first_name"
+                        name="users_first_name"
                         disabled={mutation.isPending}
                       />
                     </div>
@@ -94,7 +94,7 @@ export default function SignupPage() {
                       <InputText
                         label="Last name"
                         type="text"
-                        name="system_last_name"
+                        name="users_last_name"
                         disabled={mutation.isPending}
                       />
                     </div>
@@ -102,7 +102,7 @@ export default function SignupPage() {
                       <InputText
                         label="Email"
                         type="text"
-                        name="system_email"
+                        name="users_email"
                         disabled={mutation.isPending}
                       />
                     </div>
@@ -110,7 +110,7 @@ export default function SignupPage() {
                       <InputText
                         label="Password"
                         type="password"
-                        name="system_password"
+                        name="users_password"
                         disabled={mutation.isPending}
                       />
                     </div>

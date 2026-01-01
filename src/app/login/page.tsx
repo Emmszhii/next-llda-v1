@@ -31,9 +31,9 @@ export default function Login() {
   const mutation = useMutation({
     mutationFn: async (values) =>
       await axios.post(`/api/${devApiVersion}/controllers/users/login`, values),
-    onSuccess: (data: any) => {
+    onSuccess: (data) => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["users"] });
       // show error box
       dispatch(setSuccess(true));
       dispatch(setMessage(data.data.message));

@@ -34,7 +34,7 @@ export default function SystemLogin() {
         `/api/${devApiVersion}/controllers/system-users/login`,
         values
       ),
-    onSuccess: (data: any) => {
+    onSuccess: (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["system-user"] });
       // show error box

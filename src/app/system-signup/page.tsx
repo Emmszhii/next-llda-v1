@@ -38,7 +38,7 @@ export default function SystemSignupPage() {
         `/api/${devApiVersion}/controllers/system-users/signup`,
         values
       ),
-    onSuccess: (data: any) => {
+    onSuccess: (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["system-user"] });
       console.log(data.data.error);
