@@ -49,8 +49,6 @@ const BarChart = ({
     },
   ];
 
-  console.log(arrByStatus);
-
   const data = {
     labels: arrData,
     datasets: arrByStatus.map((item) => {

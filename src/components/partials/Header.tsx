@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { setIsShow } from "@/src/store/StoreAction";
 import { useStore } from "@/src/store/StoreContext";

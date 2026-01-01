@@ -1,11 +1,11 @@
 "use client";
-import BarChart from "../components/page/BarChart";
-import Header from "../components/partials/Header";
-import LoadingBar from "../components/partials/loading/LoadingBar";
 import { dynamicImport } from "../components/helper/dynamicImport";
+import BarChart from "../components/page/BarChart";
 import MonitoringStations from "../components/page/MonitoringStations";
 import WaterParameter from "../components/page/WaterParameter";
 import Footer from "../components/partials/Footer";
+import Header from "../components/partials/Header";
+import LoadingBar from "../components/partials/loading/LoadingBar";
 
 const AboutMap = dynamicImport(
   () => import("@/src/components/page/InteractiveMap"),
@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* BANNER */}
       <div className="w-full h-[calc(100dvh-96px)] relative overflow-hidden">
         <img
@@ -200,8 +200,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
