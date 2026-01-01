@@ -2,7 +2,7 @@
 import { setIsShow } from "@/src/store/StoreAction";
 import { useStore } from "@/src/store/StoreContext";
 import React from "react";
-import LLDALogo from "../../rsvg/LLDALogo";
+import LLDALogoSm from "../../rsvg/LLDALogoSm";
 
 const HeaderAccess = () => {
   const { store, dispatch } = useStore();
@@ -23,10 +23,10 @@ const HeaderAccess = () => {
 
   return (
     <>
-      <header className="sticky top-0 py-2 w-full z-30 bg-white overflow-hidden">
+      <header className="sticky top-0 px-6 py-2 w-full z-30 bg-white overflow-hidden">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 relative z-31">
-            <LLDALogo />
+            <LLDALogoSm />
             <h1 className="font-bold hidden lg:block">
               <span className="inline-block">
                 Laguna Lake Development Authority{" "}

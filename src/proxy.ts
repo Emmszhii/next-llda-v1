@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Define paths that are considered public (accessible without a token)
   const isPublicPath =
-    path === "" ||
+    path === "/" ||
     path === "/login" ||
     path === "/signup" ||
     path === "/verifyemail";
@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value || "";
 
   // Redirect logic based on the path and token presence
-  if (isPublicPath && token) {
+  if (isPublicPath && path != "/" && token) {
     // If trying to access a public path with a token, redirect to the home page
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
