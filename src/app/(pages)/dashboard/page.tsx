@@ -1,10 +1,6 @@
 "use client";
-import HeaderAccess from "@/src/components/page/access/HeaderAccess";
-import {
-  NavigationAccessFullWidth,
-  Navigations,
-} from "@/src/components/page/access/NavigationAccess";
 import useQueryData from "@/src/components/use-query/useQueryData";
+import Layout from "../../components/Layout";
 
 export default function Dashboard() {
   const {
@@ -15,9 +11,9 @@ export default function Dashboard() {
 
   return (
     <>
-      <HeaderAccess />
-      <NavigationAccessFullWidth />
-      <Navigations />
+      <Layout menu="dashboard" submenu="">
+        <div></div>
+      </Layout>
     </>
   );
 }

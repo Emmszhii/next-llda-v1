@@ -14,9 +14,9 @@ import {
   MdOutlineLogout,
   MdOutlineMailOutline,
 } from "react-icons/md";
-import LoadingBar from "../../partials/loading/LoadingBar";
-import ScreenSpinner from "../../partials/loading/ScreenSpinner";
-import LLDALogoSm from "../../rsvg/LLDALogoSm";
+import LoadingBar from "../../components/partials/loading/LoadingBar";
+import ScreenSpinner from "../../components/partials/loading/ScreenSpinner";
+import LLDALogoSm from "../../components/rsvg/LLDALogoSm";
 
 const HeaderAccess = () => {
   const { data: session, status } = useSession() as any;
@@ -33,10 +33,10 @@ const HeaderAccess = () => {
     : `${session?.data.users_last_name}, ${session?.data.users_first_name}`;
   const lastName = isDeveloper
     ? session?.data.system_last_name
-    : session?.data.users_email;
+    : session?.data.users_last_name;
   const firstName = isDeveloper
     ? session?.data.system_first_name
-    : session?.data.users_email;
+    : session?.data.users_first_name;
 
   const handleShowNavigation = () => {
     dispatch(setIsNavFullOpen(!store.is_nav_full_open));
@@ -80,17 +80,17 @@ const HeaderAccess = () => {
   return (
     <>
       {loading && <ScreenSpinner />}
-      <header className="sticky top-0 px-2 py-2 w-full z-30 overflow-hidden border-b-2 border-primary">
+      <header className="fixed top-0 px-2 py-2 w-full z-30 overflow-hidden border-b-2 border-primary">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 relative z-31">
             <button
               onClick={handleShowNavigation}
               className={`py-4 pl-1 pr-0 text-gray-600 bg-white z-50 flex items-center rounded-br-sm focus:outline-0 cursor-pointer duration-200 ease-in`}
-              title={store.is_settings_open ? "Expand" : "Collapse"}
+              title={store.is_nav_full_open ? "Expand" : "Collapse"}
             >
               <FaIndent
                 className={`text-sm hover:text-secondary ${
-                  !store.is_settings_open && "rotate-180"
+                  !store.is_nav_full_open && "rotate-180"
                 }`}
               />
             </button>

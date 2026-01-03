@@ -60,9 +60,9 @@ export const getNavList = () => {
           submenu: "users",
         },
         {
-          name: "Station",
-          path: `/settings/station`,
-          submenu: "station",
+          name: "Stations",
+          path: `/settings/stations`,
+          submenu: "stations",
         },
         {
           name: "Quality Type",
@@ -81,7 +81,7 @@ export const getNavList = () => {
   return navList;
 };
 
-export const NavigationAccessFullWidth = ({ menu = "", submenu = null }) => {
+export const NavigationAccessFullWidth = ({ menu = "", submenu = "" }) => {
   const { data: session, status } = useSession() as any;
   const { store, dispatch } = useStore();
   const isMobileOrTablet =
@@ -113,7 +113,7 @@ export const NavigationAccessFullWidth = ({ menu = "", submenu = null }) => {
         <nav
           className={`${
             store.is_nav_full_open ? "-translate-x-56" : "translate-x-0"
-          } duration-200 ease-in fixed z-40 overflow-y-auto w-48 print:hidden py-3 uppercase  h-[calc(100dvh-68px)] scrollbar-thin bg-primary text-white`}
+          } duration-200 ease-in fixed top-17 z-40 overflow-y-auto w-48 print:hidden py-3 uppercase  h-[calc(100dvh-68px)] scrollbar-thin bg-primary text-white`}
           ref={scrollRef}
         >
           <div className="text-sm text-dark flex flex-col justify-between h-full">
@@ -123,7 +123,9 @@ export const NavigationAccessFullWidth = ({ menu = "", submenu = null }) => {
                   <li
                     key={key}
                     className={`${
-                      menu === `${item.menu}` ? "bg-white" : "hover:bg-white/30"
+                      menu === `${item.menu}`
+                        ? "bg-white/30"
+                        : "hover:bg-white/30"
                     } mb-2 pl-1`}
                     onClick={() => dispatch(setIsSearch(false))}
                   >
@@ -145,7 +147,7 @@ export const NavigationAccessFullWidth = ({ menu = "", submenu = null }) => {
                   <React.Fragment key={key}>
                     <li
                       className={`${
-                        menu === item.menu ? "bg-white" : "hover:bg-white/30"
+                        menu === item.menu ? "bg-white/30" : "hover:bg-white/30"
                       } mb-2 cursor-pointer pl-1`}
                       onClick={item.on_click}
                     >
@@ -209,7 +211,7 @@ export const NavigationAccessFullWidth = ({ menu = "", submenu = null }) => {
   );
 };
 
-export const Navigations = ({ menu = "", submenu = null }) => {
+export const Navigations = ({ menu = "", submenu = "" }) => {
   const { store, dispatch } = useStore();
   const navWrapperRef = React.useRef<HTMLInputElement | null>(null) as any;
   const hoverTimeout = React.useRef<HTMLInputElement | null>(null) as any;
@@ -254,7 +256,7 @@ export const Navigations = ({ menu = "", submenu = null }) => {
       <div
         className={`${
           !store.is_nav_full_open ? "-translate-x-full" : "translate-x-0!"
-        } navigation duration-200 ease-in w-fit `}
+        } navigation `}
       >
         <div
           className={`${
