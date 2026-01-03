@@ -1,8 +1,10 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { decrypt } from "./app/lib/lib";
+import { cookies } from "next/headers";
 
 export async function proxy(request: NextRequest) {
+  const cookie = await cookies();
   const path = request.nextUrl.pathname;
 
   // Define paths that are considered public (accessible without a token)
@@ -15,6 +17,12 @@ export async function proxy(request: NextRequest) {
 
   // Get the token from the cookies
   const token = request.cookies.get("token")?.value || "";
+  const sessionCookie = cookie.get("session")?.value || "";
+
+  // if (!sessionCookie) {
+  //   console.log("sessionCookie", sessionCookie);
+  //   return NextResponse.redirect(new URL("/", request.nextUrl));
+  // }
 
   // Redirect logic based on the path and token presence
   if (isPublicPath && path != "/" && token) {

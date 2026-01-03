@@ -10,11 +10,13 @@ import {
   MdOutlineMailOutline,
 } from "react-icons/md";
 import LoadingBar from "../../partials/loading/LoadingBar";
+import ScreenSpinner from "../../partials/loading/ScreenSpinner";
 import LLDALogoSm from "../../rsvg/LLDALogoSm";
 
 const HeaderAccess = () => {
   const { data: session, status } = useSession() as any;
   const { store, dispatch } = useStore();
+  const [loading, setLoading] = React.useState(false);
   const ref = React.useRef<HTMLInputElement | null>(null);
 
   const isDeveloper = session?.data.system_first_name;
@@ -49,8 +51,12 @@ const HeaderAccess = () => {
   };
 
   const handleLogout = async () => {
-    handleShowNavigation();
-    signOut({ callbackUrl: "/" });
+    setLoading(true);
+    setTimeout(() => {
+      handleShowNavigation();
+      signOut({ callbackUrl: "/" });
+      setLoading(false);
+    }, 2000);
   };
 
   const handleClickOutside = (e: any) => {
@@ -68,6 +74,7 @@ const HeaderAccess = () => {
 
   return (
     <>
+      {loading && <ScreenSpinner />}
       <header className="sticky top-0 px-6 py-2 w-full z-30 overflow-hidden border-b-2 border-primary">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 relative z-31">

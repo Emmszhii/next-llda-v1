@@ -67,23 +67,37 @@ const Header = () => {
                   Explore the lake
                 </a>
               </li>
-              <li>
-                {status == "loading" ? (
+              {status == "loading" ? (
+                <li>
                   <div className="w-20 h-6">
                     <LoadingBar />
                   </div>
-                ) : session?.data._id ? (
-                  <button
-                    type="button"
-                    className="cursor-pointer hover:underline"
-                    onClick={() => handleLogout()}
-                  >
-                    Logout
-                  </button>
-                ) : (
+                </li>
+              ) : session?.data._id ? (
+                <>
+                  <li>
+                    <Link
+                      href="/dashboard"
+                      className="cursor-pointer hover:underline"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      className="cursor-pointer hover:underline"
+                      onClick={() => handleLogout()}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li>
                   <Link href="/login">Login</Link>
-                )}
-              </li>
+                </li>
+              )}
             </ul>
           </div>
         </div>

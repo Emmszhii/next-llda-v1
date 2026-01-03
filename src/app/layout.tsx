@@ -4,6 +4,7 @@ import QueryClientProviders from "../components/provider/useQueryClientProvider"
 import SessionClientProvider from "../components/provider/useSessionClientProvider";
 import { StoreProvider } from "../store/StoreContext";
 import "./globals.css";
+import UseCheckSessionLogout from "../components/provider/useCheckSessionLogout";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${poppins.variable} antialiased`}>
         <QueryClientProviders>
           <SessionClientProvider>
-            <StoreProvider>{children}</StoreProvider>
+            <UseCheckSessionLogout>
+              <StoreProvider>{children}</StoreProvider>
+            </UseCheckSessionLogout>
           </SessionClientProvider>
         </QueryClientProviders>
       </body>

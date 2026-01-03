@@ -1,4 +1,3 @@
-import Users from "@/src/app/api/v1/models/Users";
 import { decrypt } from "@/src/app/lib/lib";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -10,7 +9,7 @@ export async function GET(request: NextRequest) {
   const sessionCookie = cookie.get("session")?.value || "";
   let userData: object = {},
     count: number = 0;
-  if (sessionCookie != "") {
+  if (tokenCookie && sessionCookie != "") {
     const decryptSession = await decrypt(sessionCookie);
     const data = decryptSession._doc as any;
     delete data.users_password;
@@ -34,6 +33,14 @@ export async function GET(request: NextRequest) {
     count: count,
     success: true,
   });
+
+  if (!sessionCookie || !tokenCookie) {
+    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
+    response.cookies.set("session", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    });
+  }
 
   return response;
 }
