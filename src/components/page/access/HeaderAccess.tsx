@@ -23,7 +23,7 @@ const HeaderAccess = () => {
 
   return (
     <>
-      <header className="sticky top-0 px-6 py-2 w-full z-30 bg-white overflow-hidden">
+      <header className="sticky top-0 px-6 py-2 w-full z-30 bg-primary overflow-hidden">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 relative z-31">
             <LLDALogoSm />
@@ -31,7 +31,6 @@ const HeaderAccess = () => {
               <span className="inline-block">
                 Laguna Lake Development Authority{" "}
               </span>
-              {/* <span className="inline-block ml-1">(LLDA)</span> */}
             </h1>
             <h1 className="font-bold lg:hidden">LLDA</h1>
           </div>

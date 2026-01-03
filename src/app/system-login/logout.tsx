@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const systemUserLogout = async () => {
   const router = useRouter();
   try {
-    await axios.get(`/api/${devApiVersion}/controllers//logout`);
+    await axios.get(`/api${devApiVersion}/controllers//logout`);
     router.push("/system-login");
   } catch (error: any) {
     console.log(error.message);

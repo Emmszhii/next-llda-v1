@@ -1,4 +1,4 @@
-export const devApiVersion = "v1";
+export const devApiVersion = "/v1";
 export const setTimeZone = "Asia/Taipei";
 
 export const arrayOfMonths = [

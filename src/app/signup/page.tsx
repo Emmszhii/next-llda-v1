@@ -35,7 +35,7 @@ export default function SignupPage() {
   const mutation = useMutation({
     mutationFn: async (values) =>
       await axios.post(
-        `/api/${devApiVersion}/controllers/system-users/signup`,
+        `/api${devApiVersion}/controllers/system-users/signup`,
         values
       ),
     onSuccess: (data) => {

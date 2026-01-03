@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // This function handles HTTP GET requests to the API route.
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const response = NextResponse.json({
-      message: "Logout successful",
+      message: "Logout successfull",
       success: true,
     });
     response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });

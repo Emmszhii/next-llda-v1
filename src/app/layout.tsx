@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import QueryClientProviders from "../components/helper/useQueryClientProvider";
+import QueryClientProviders from "../components/provider/useQueryClientProvider";
 import { StoreProvider } from "../store/StoreContext";
 import "./globals.css";
+import SessionClientProvider from "../components/provider/useSessionClientProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} ${poppins.variable} antialiased`}>
         <QueryClientProviders>
-          <StoreProvider>{children}</StoreProvider>
+          <SessionClientProvider>
+            <StoreProvider>{children}</StoreProvider>
+          </SessionClientProvider>
         </QueryClientProviders>
       </body>
     </html>

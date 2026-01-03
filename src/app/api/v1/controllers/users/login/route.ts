@@ -1,7 +1,9 @@
 import { connectDatabase } from "@/src/app/api/v1/db-config/dbconfig";
 import Users from "@/src/app/api/v1/models/Users";
+import { encrypt } from "@/src/app/lib/lib";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { signIn } from "next-auth/react";
 import { NextRequest, NextResponse } from "next/server";
 import { getDataFromToken } from "../../../helpers/getDataFromToken";
 
@@ -12,7 +14,6 @@ export async function POST(request: NextRequest) {
   // Defines an asynchronous POST request handler.
   try {
     const reqBody = await request.json();
-    // return NextResponse.json({ reqBody }, { status: 200 });
     const { users_email, users_password } = reqBody;
     //Checks if a user with the provided email already exists.
     const user = await Users.findOne({ users_email });
@@ -43,15 +44,23 @@ export async function POST(request: NextRequest) {
     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
       expiresIn: "7d",
     });
+    const session = await encrypt(tokenData);
+    // await signIn("credentials", {
+    //   session,
+    //   redirect: false,
+    // });
 
     // Create a JSON response indicating successful login
     const response = NextResponse.json({
-      message: "Login successful",
+      message: "Login successfull",
       success: true,
     });
 
     // Set the token as an HTTP-only cookie
     response.cookies.set("token", token, {
+      httpOnly: true,
+    });
+    response.cookies.set("session", session, {
       httpOnly: true,
     });
 

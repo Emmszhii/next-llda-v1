@@ -4,7 +4,6 @@ import { devApiVersion } from "@/src/components/helper/helper-functions";
 import ButtonSpinner from "@/src/components/partials/loading/ButtonSpinner";
 import LogoMd from "@/src/components/partials/logo/LogoMd";
 import MessageErrorModal from "@/src/components/partials/modal/MessageErrorModal";
-import ModalSuccess from "@/src/components/partials/modal/ModalSuccess";
 import { setError, setMessage, setSuccess } from "@/src/store/StoreAction";
 import { useStore } from "@/src/store/StoreContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,32 +13,30 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 
-export default function Login() {
+export default function ForgotPassword() {
   const { store, dispatch } = useStore();
   const router = useRouter();
 
   const initVal = {
     users_email: "",
-    users_password: "",
   };
   const yupSchema = Yup.object({
     users_email: Yup.string().required("Required").email("Invalid email"),
-    users_password: Yup.string().required("Required"),
   });
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (values) =>
-      await axios.post(`/api${devApiVersion}/controllers/users/login`, values),
+      await axios.post(
+        `/api${devApiVersion}/controllers/users/forgot-password`,
+        values
+      ),
     onSuccess: (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["users"] });
       // show error box
       dispatch(setSuccess(true));
       dispatch(setMessage(data.data.message));
-      // setTimeout(() => {
-      // }, 500);
-      router.push("/dashboard");
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
@@ -61,7 +58,9 @@ export default function Login() {
           <div className="flex justify-center">
             <LogoMd />
           </div>
-          <p className="mt-4 mb-5 text-lg font-bold text-center">LOGIN</p>
+          <p className="mt-4 mb-5 text-lg font-bold text-center">
+            Forgot Password
+          </p>
           <Formik
             initialValues={initVal}
             validationSchema={yupSchema}
@@ -83,14 +82,7 @@ export default function Login() {
                         disabled={mutation.isPending}
                       />
                     </div>
-                    <div className="relative mb-6">
-                      <InputText
-                        label="Password"
-                        type="password"
-                        name="users_password"
-                        disabled={mutation.isPending}
-                      />
-                    </div>
+
                     {store.error && <MessageErrorModal />}
                   </div>
 
@@ -101,18 +93,15 @@ export default function Login() {
                         disabled={mutation.isPending || !props.dirty}
                         className="btn-modal-submit relative"
                       >
-                        {mutation.isPending ? <ButtonSpinner /> : "Login"}
+                        {mutation.isPending ? <ButtonSpinner /> : "Submit"}
                       </button>
                     </div>
 
                     <div className="mt-4 text-xs">
                       <span>Go To </span>
                       <div className="ml-2 inline-flex items-center gap-2">
-                        <Link
-                          className="hover:underline"
-                          href="/forgot-password"
-                        >
-                          Forgot Password
+                        <Link className="hover:underline" href="/login">
+                          login
                         </Link>
                         <span>|</span>
                         <Link className="hover:underline" href="/">
@@ -127,8 +116,6 @@ export default function Login() {
           </Formik>
         </div>
       </div>
-
-      {store.success && <ModalSuccess />}
     </>
   );
 }

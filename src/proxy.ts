@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { decrypt } from "./app/lib/lib"; 
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
   // Define paths that are considered public (accessible without a token)
@@ -9,6 +10,7 @@ export function proxy(request: NextRequest) {
     path === "/" ||
     path === "/login" ||
     path === "/signup" ||
+    path === "/forgot-password" ||
     path === "/verifyemail";
 
   // Get the token from the cookies

@@ -1,10 +1,14 @@
 "use client";
-import React from "react";
 import { setIsShow } from "@/src/store/StoreAction";
 import { useStore } from "@/src/store/StoreContext";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import React from "react";
 import LLDALogo from "../rsvg/LLDALogo";
+import LoadingBar from "./loading/LoadingBar";
 
 const Header = () => {
+  const { data: session, status } = useSession() as any;
   const { store, dispatch } = useStore();
 
   const handleShowNavigation = () => {
@@ -18,6 +22,11 @@ const Header = () => {
 
   const handleClick = () => {
     dispatch(setIsShow(!store.is_show));
+  };
+
+  const logout = async () => {
+    handleShowNavigation();
+    signOut();
   };
 
   return (
@@ -57,6 +66,23 @@ const Header = () => {
                 <a onClick={handleClick} href="#">
                   Explore the lake
                 </a>
+              </li>
+              <li>
+                {status == "loading" ? (
+                  <div className="w-20 h-6">
+                    <LoadingBar />
+                  </div>
+                ) : session?.data._id ? (
+                  <button
+                    type="button"
+                    className="cursor-pointer hover:underline"
+                    onClick={() => logout()}
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link href="/login">Login</Link>
+                )}
               </li>
             </ul>
           </div>

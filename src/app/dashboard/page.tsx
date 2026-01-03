@@ -1,27 +1,17 @@
+"use client";
 import { devApiVersion } from "@/src/components/helper/helper-functions";
 import HeaderAccess from "@/src/components/page/access/HeaderAccess";
+import useQueryData from "@/src/components/use-query/useQueryData";
 import { useStore } from "@/src/store/StoreContext";
 import axios from "axios";
 import React from "react";
 
-export default async function Dashboard() {
-  // React.useEffect(async () => {
-  //   const res = await axios.get("/api/users/me");
-  // }, []);
-
-  // const getData = async () => {
-  //   const res = await axios.get(
-  //     `/api/${devApiVersion}/controllers/users/login`
-  //   );
-  //   console.log(res);
-  //   return res;
-  // };
-
-  // React.useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // const res = await axios.get("/api/users/me");
+export default function Dashboard() {
+  const {
+    isLoading,
+    isFetching,
+    data: data,
+  } = useQueryData(`/controllers/system-users`, "get", "");
 
   return (
     <>

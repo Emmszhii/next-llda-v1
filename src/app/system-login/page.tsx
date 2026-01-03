@@ -31,7 +31,7 @@ export default function SystemLogin() {
   const mutation = useMutation({
     mutationFn: async (values) =>
       await axios.post(
-        `/api/${devApiVersion}/controllers/system-users/login`,
+        `/api${devApiVersion}/controllers/system-users/login`,
         values
       ),
     onSuccess: (data) => {
@@ -104,7 +104,7 @@ export default function SystemLogin() {
                         disabled={mutation.isPending || !props.dirty}
                         className="btn-modal-submit relative"
                       >
-                        {mutation.isPending && <ButtonSpinner />} Signup
+                        {mutation.isPending && <ButtonSpinner />} Login
                       </button>
                     </div>
 
