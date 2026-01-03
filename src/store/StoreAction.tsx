@@ -16,6 +16,10 @@ export const setIsShow = (val: boolean): StoreAction => ({
   type: "IS_SHOW",
   is_show: val,
 });
+export const setIsHeaderShow = (val: boolean): StoreAction => ({
+  type: "IS_HEADER_SHOW",
+  is_header_show: val,
+});
 export const setIsArchive = (val: boolean): StoreAction => ({
   type: "ARCHIVE",
   archive: val,

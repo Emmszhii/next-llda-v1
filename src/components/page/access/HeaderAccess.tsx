@@ -1,14 +1,41 @@
 "use client";
-import { setIsShow } from "@/src/store/StoreAction";
+import { setIsHeaderShow, setIsShow } from "@/src/store/StoreAction";
 import { useStore } from "@/src/store/StoreContext";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
+import {
+  MdOutlineAccountCircle,
+  MdOutlineLogout,
+  MdOutlineMailOutline,
+} from "react-icons/md";
+import LoadingBar from "../../partials/loading/LoadingBar";
 import LLDALogoSm from "../../rsvg/LLDALogoSm";
 
 const HeaderAccess = () => {
+  const { data: session, status } = useSession() as any;
   const { store, dispatch } = useStore();
+  const ref = React.useRef<HTMLInputElement | null>(null);
+
+  const isDeveloper = session?.data.system_first_name;
+  const email = isDeveloper
+    ? session?.data.system_email
+    : session?.data.users_email;
+  const name = isDeveloper
+    ? `${session?.data.system_last_name}, ${session?.data.system_first_name}`
+    : `${session?.data.users_last_name}, ${session?.data.users_first_name}`;
+  const lastName = isDeveloper
+    ? session?.data.system_last_name
+    : session?.data.users_email;
+  const firstName = isDeveloper
+    ? session?.data.system_first_name
+    : session?.data.users_email;
 
   const handleShowNavigation = () => {
     dispatch(setIsShow(!store.is_show));
+  };
+  const handleShowHeader = () => {
+    dispatch(setIsHeaderShow(!store.is_header_show));
   };
 
   // can be use for disabling scroll when modal is shown
@@ -21,9 +48,27 @@ const HeaderAccess = () => {
     dispatch(setIsShow(!store.is_show));
   };
 
+  const handleLogout = async () => {
+    handleShowNavigation();
+    signOut({ callbackUrl: "/" });
+  };
+
+  const handleClickOutside = (e: any) => {
+    if (!ref.current?.contains(e.target)) {
+      setTimeout(() => {
+        dispatch(setIsHeaderShow(false));
+      }, 100);
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
     <>
-      <header className="sticky top-0 px-6 py-2 w-full z-30 bg-primary overflow-hidden">
+      <header className="sticky top-0 px-6 py-2 w-full z-30 overflow-hidden border-b-2 border-primary">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 relative z-31">
             <LLDALogoSm />
@@ -34,20 +79,64 @@ const HeaderAccess = () => {
             </h1>
             <h1 className="font-bold lg:hidden">LLDA</h1>
           </div>
-          <div
-            className={`burger_button ${store.is_show ? "active" : ""}`}
-            onClick={handleShowNavigation}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div
-            className={`fixed w-full h-dvh left-full z-30 top-0 transition-all lg:static lg:w-fit lg:h-fit lg:transition-none ${
-              store.is_show ? "left-0!" : ""
-            }`}
-          >
-            <ul className="flex flex-col pt-20 lg:pt-0 lg:flex-row items-center gap-y-5 gap-x-10 cursor-pointer font-semibold h-dvh bg-white lg:bg-transparent lg:h-fit"></ul>
+          <div>
+            <div className="block relative" ref={ref}>
+              {status == "loading" ? (
+                <div className="block size-9 rounded-full overflow-hidden">
+                  <LoadingBar />
+                </div>
+              ) : session?.count == 0 ? null : (
+                <>
+                  <div
+                    className="flex items-center px-1 gap-2 group cursor-pointer"
+                    onClick={handleShowHeader}
+                  >
+                    <div
+                      className={`p-px duration-50 ease-out border-2 border-transparent hover:border-2 hover:border-primary hover:border-opacity-50 rounded-full ${
+                        store.is_header_show
+                          ? "border-primary!"
+                          : "border-opacity-50!"
+                      }`}
+                    >
+                      <div className="flex bg-primary rounded-full justify-center items-center min-w-8 min-h-8 max-w-8 max-h-8 text-white pt-0.5 uppercase">
+                        {lastName[0]}
+                        {firstName[0]}
+                      </div>
+                    </div>
+                  </div>
+                  {store.is_header_show && (
+                    <div className="text-xs p-1 fixed top-15 right-7 bg-white rounded-md border border-primary">
+                      <ul className="p-2">
+                        <li className="mb-0 font-bold  capitalize text-sm">
+                          {name}
+                        </li>
+                        <li className="mb-0 pb-2 capitalize text-xs">
+                          {isDeveloper ? "Developer" : "Admin"}
+                        </li>
+                        <li className="pb-2 flex items-center gap-2 text-xs">
+                          <MdOutlineMailOutline />
+                          {email}
+                        </li>
+                        <li className="flex items-center gap-2 hover:text-secondary">
+                          <MdOutlineAccountCircle />
+                          <Link href={`/account`} className="w-full">
+                            Account
+                          </Link>
+                        </li>
+
+                        <button
+                          onClick={() => handleLogout()}
+                          className="hover:text-secondary flex items-center gap-2 pt-2 w-full"
+                        >
+                          <MdOutlineLogout />
+                          Logout
+                        </button>
+                      </ul>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </header>

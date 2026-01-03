@@ -8,7 +8,8 @@ export async function GET(request: NextRequest) {
   const cookie = await cookies();
   const tokenCookie = cookie.get("token")?.value || "";
   const sessionCookie = cookie.get("session")?.value || "";
-  let userData: object = {};
+  let userData: object = {},
+    count: number = 0;
   if (sessionCookie != "") {
     const decryptSession = await decrypt(sessionCookie);
     const data = decryptSession._doc as any;
@@ -23,13 +24,14 @@ export async function GET(request: NextRequest) {
     //   });
     //   console.log(user);
     // }
+    count = 1;
     userData = data as object;
   }
 
   const response = NextResponse.json({
     message: "Session success.",
     data: userData,
-    count: 1,
+    count: count,
     success: true,
   });
 

@@ -24,7 +24,7 @@ const Header = () => {
     dispatch(setIsShow(!store.is_show));
   };
 
-  const logout = async () => {
+  const handleLogout = async () => {
     handleShowNavigation();
     signOut();
   };
@@ -76,7 +76,7 @@ const Header = () => {
                   <button
                     type="button"
                     className="cursor-pointer hover:underline"
-                    onClick={() => logout()}
+                    onClick={() => handleLogout()}
                   >
                     Logout
                   </button>

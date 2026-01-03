@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import QueryClientProviders from "../components/provider/useQueryClientProvider";
+import SessionClientProvider from "../components/provider/useSessionClientProvider";
 import { StoreProvider } from "../store/StoreContext";
 import "./globals.css";
-import SessionClientProvider from "../components/provider/useSessionClientProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",

@@ -10,6 +10,7 @@ import { useStore } from "@/src/store/StoreContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Form, Formik } from "formik";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
@@ -31,15 +32,15 @@ export default function Login() {
   const mutation = useMutation({
     mutationFn: async (values) =>
       await axios.post(`/api${devApiVersion}/controllers/users/login`, values),
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["users"] });
       // show error box
       dispatch(setSuccess(true));
       dispatch(setMessage(data.data.message));
-      // setTimeout(() => {
-      // }, 500);
-      router.push("/dashboard");
+      // router.push("/dashboard");
+      await signIn("credentials", { redirect: false, ...data.data });
+      window.location.href = "/dashboard"; // Force a full page reload and redirect
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

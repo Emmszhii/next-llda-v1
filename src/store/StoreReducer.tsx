@@ -5,6 +5,7 @@ export const initialState: StoreState = {
   message: "",
   success: false,
   is_show: false,
+  is_header_show: false,
   archive: false,
   delete: false,
   restore: false,
@@ -35,6 +36,11 @@ export const StoreReducer = (state: StoreState, action: StoreAction) => {
       return {
         ...state,
         is_show: action.is_show,
+      };
+    case "IS_HEADER_SHOW":
+      return {
+        ...state,
+        is_header_show: action.is_header_show,
       };
     case "ARCHIVE":
       return {

@@ -3,6 +3,7 @@ export interface StoreState {
   message: string;
   success: boolean;
   is_show: boolean;
+  is_header_show: boolean;
   archive: boolean;
   delete: boolean;
   restore: boolean;
@@ -17,6 +18,7 @@ export type StoreAction =
   | { type: "MESSAGE"; message: string }
   | { type: "SUCCESS"; success: boolean }
   | { type: "IS_SHOW"; is_show: boolean }
+  | { type: "IS_HEADER_SHOW"; is_header_show: boolean }
   | { type: "ARCHIVE"; archive: boolean }
   | { type: "DELETE"; delete: boolean }
   | { type: "RESTORE"; restore: boolean }

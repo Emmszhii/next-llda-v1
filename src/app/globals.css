@@ -109,6 +109,9 @@ body {
   label.error-show {
     @apply text-red-500;
   }
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @layer components {
