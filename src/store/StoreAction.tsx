@@ -44,6 +44,14 @@ export const setIsLogin = (val: boolean): StoreAction => ({
   type: "IS_LOGIN",
   is_login: val,
 });
+export const setIsSettingsOpen = (val: boolean): StoreAction => ({
+  type: "IS_SETTINGS_OPEN",
+  is_settings_open: val,
+});
+export const setIsNavFullOpen = (val: boolean): StoreAction => ({
+  type: "IS_NAV_FULL_OPEN",
+  is_nav_full_open: val,
+});
 export const setCredentials = (val: object): StoreAction => ({
   type: "CREDENTIALS",
   credentials: val,

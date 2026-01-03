@@ -10,6 +10,8 @@ export interface StoreState {
   is_add: boolean;
   is_search: boolean;
   is_login: boolean;
+  is_settings_open: boolean;
+  is_nav_full_open: boolean;
   credentials: object;
 }
 
@@ -25,4 +27,6 @@ export type StoreAction =
   | { type: "IS_ADD"; is_add: boolean }
   | { type: "CREDENTIALS"; credentials: object }
   | { type: "IS_LOGIN"; is_login: boolean }
+  | { type: "IS_SETTINGS_OPEN"; is_settings_open: boolean }
+  | { type: "IS_NAV_FULL_OPEN"; is_nav_full_open: boolean }
   | { type: "IS_SEARCH"; is_search: boolean };

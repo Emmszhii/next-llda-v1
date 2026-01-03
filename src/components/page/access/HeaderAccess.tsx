@@ -1,9 +1,14 @@
 "use client";
-import { setIsHeaderShow, setIsShow } from "@/src/store/StoreAction";
+import {
+  setIsHeaderShow,
+  setIsNavFullOpen,
+  setIsShow,
+} from "@/src/store/StoreAction";
 import { useStore } from "@/src/store/StoreContext";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
+import { FaIndent } from "react-icons/fa";
 import {
   MdOutlineAccountCircle,
   MdOutlineLogout,
@@ -34,7 +39,7 @@ const HeaderAccess = () => {
     : session?.data.users_email;
 
   const handleShowNavigation = () => {
-    dispatch(setIsShow(!store.is_show));
+    dispatch(setIsNavFullOpen(!store.is_nav_full_open));
   };
   const handleShowHeader = () => {
     dispatch(setIsHeaderShow(!store.is_header_show));
@@ -75,9 +80,20 @@ const HeaderAccess = () => {
   return (
     <>
       {loading && <ScreenSpinner />}
-      <header className="sticky top-0 px-6 py-2 w-full z-30 overflow-hidden border-b-2 border-primary">
+      <header className="sticky top-0 px-2 py-2 w-full z-30 overflow-hidden border-b-2 border-primary">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 relative z-31">
+            <button
+              onClick={handleShowNavigation}
+              className={`py-4 pl-1 pr-0 text-gray-600 bg-white z-50 flex items-center rounded-br-sm focus:outline-0 cursor-pointer duration-200 ease-in`}
+              title={store.is_settings_open ? "Expand" : "Collapse"}
+            >
+              <FaIndent
+                className={`text-sm hover:text-secondary ${
+                  !store.is_settings_open && "rotate-180"
+                }`}
+              />
+            </button>
             <LLDALogoSm />
             <h1 className="font-bold hidden lg:block">
               <span className="inline-block">
@@ -89,7 +105,7 @@ const HeaderAccess = () => {
           <div>
             <div className="block relative" ref={ref}>
               {status == "loading" ? (
-                <div className="block size-9 rounded-full overflow-hidden">
+                <div className="block size-8 mr-2 rounded-full overflow-hidden">
                   <LoadingBar />
                 </div>
               ) : session?.count == 0 ? null : (

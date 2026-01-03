@@ -12,6 +12,8 @@ export const initialState: StoreState = {
   is_add: false,
   is_search: false,
   is_login: false,
+  is_settings_open: false,
+  is_nav_full_open: false,
   credentials: {},
 };
 
@@ -66,6 +68,16 @@ export const StoreReducer = (state: StoreState, action: StoreAction) => {
       return {
         ...state,
         is_search: action.is_search,
+      };
+    case "IS_SETTINGS_OPEN":
+      return {
+        ...state,
+        is_settings_open: action.is_settings_open,
+      };
+    case "IS_NAV_FULL_OPEN":
+      return {
+        ...state,
+        is_nav_full_open: action.is_nav_full_open,
       };
     default:
       return state;
