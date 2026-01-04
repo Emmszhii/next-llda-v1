@@ -9,7 +9,7 @@ export default function queryData(
   method: Methods = "get",
   fd = {}
 ) {
-  let url = `/api${devApiVersion}${endpoint}`;
+  let url = `${endpoint}`;
   let username = "";
   let password = "";
   let auth = btoa(`${username}:${password}`);

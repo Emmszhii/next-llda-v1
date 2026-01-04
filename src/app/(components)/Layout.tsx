@@ -1,5 +1,5 @@
 "use client";
-import HeaderAccess from "@/src/app/components/HeaderAccess";
+import HeaderAccess from "@/src/app/(components)/HeaderAccess";
 import React from "react";
 import FooterAccess from "./FooterAccess";
 import { NavigationAccessFullWidth, Navigations } from "./NavigationAccess";

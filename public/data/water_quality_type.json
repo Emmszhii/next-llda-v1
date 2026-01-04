@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "name": "BOD",
+    "measurement": "BOD (mg/L)"
+  },
+  {
+    "id": "2",
+    "name": "Disolve Oxygen",
+    "measurement": "DO (mg/L)"
+  },
+  {
+    "id": "3",
+    "name": "Fecal Coliform",
+    "measurement": "FC (MPN/100ml)"
+  },
+  {
+    "id": "4",
+    "name": "pH",
+    "measurement": "pH units"
+  },
+  {
+    "id": "5",
+    "name": "Ammonia",
+    "measurement": "Ammonia (mg/L) "
+  },
+  {
+    "id": "6",
+    "name": "Nitrate",
+    "measurement": "Nitrate (mg/L)"
+  },
+  {
+    "id": "7",
+    "name": "Inorganic Phosphate ",
+    "measurement": "Inorganic Phosphate (mg/L)"
+  },
+  {
+    "id": "8",
+    "name": "Turbity Levels",
+    "measurement": "NTU"
+  }
+]

@@ -1,5 +1,5 @@
 "use client";
-import Layout from "@/src/app/components/Layout";
+import Layout from "@/src/app/(components)/Layout";
 
 export default function Dashboard() {
   // const {

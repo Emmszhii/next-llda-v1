@@ -6,7 +6,13 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import { lagunaCenterCoordinates } from "../helper/helper-functions";
 
-const InteractiveMap = () => {
+// Define an interface or type alias for the props/parameters
+interface MyComponentProps {
+  dataStations: any;
+  // other props...
+}
+
+const InteractiveMap = ({ dataStations }: MyComponentProps) => {
   return (
     <>
       <MapContainer

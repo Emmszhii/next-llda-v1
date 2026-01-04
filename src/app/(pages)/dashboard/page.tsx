@@ -1,6 +1,6 @@
 "use client";
 import useQueryData from "@/src/components/use-query/useQueryData";
-import Layout from "../../components/Layout";
+import Layout from "../../(components)/Layout";
 
 export default function Dashboard() {
   const {
