@@ -13,13 +13,14 @@ import InteractiveMap from "./(root-components)/InteractiveMap";
 import About from "./(root-components)/About";
 import WaterQualityChart from "./(root-components)/WaterQualityChart";
 import WaterQualityParameter from "./(root-components)/WaterQualityParameter";
+import {
+  getDateNow,
+  mergeArraysWithoutDuplicates,
+} from "../components/helper/helper-functions";
 
 export default function Home() {
   const { store, dispatch } = useStore();
-  const [filterTimePeriodData, setFilterTimePeriodData] = React.useState({
-    id: "",
-    name: "",
-  });
+  const [filterTimePeriodData, setFilterTimePeriodData] = React.useState("5");
   const [filterStationsData, setFilterStationsData] = React.useState({
     id: "",
     name: "",
@@ -72,6 +73,46 @@ export default function Home() {
     dataWaterQualityStatusIsFetching ||
     dataStationsIsFetching;
 
+  const dateNow = new Date(getDateNow());
+  const subtractDateByFilterTimePeriod = new Date(dateNow);
+  subtractDateByFilterTimePeriod.setFullYear(
+    subtractDateByFilterTimePeriod.getFullYear() - Number(filterTimePeriodData)
+  );
+  const formatedDate = subtractDateByFilterTimePeriod
+    .toISOString()
+    .split("T")[0];
+  const filterByStations = isFetching
+    ? []
+    : filterStationsData?.id
+    ? dataWaterQuality?.data.filter(
+        (item: any) => item.stations_id == filterStationsData?.id
+      )
+    : dataWaterQuality?.data;
+  const filterByTimePeriod = isFetching
+    ? []
+    : filterTimePeriodData
+    ? dataWaterQuality?.data
+        .map((item: any) => {
+          if (new Date(item.date) >= new Date(formatedDate)) {
+            return item;
+          }
+          return null;
+        })
+        .filter((item: any) => item)
+    : dataWaterQuality?.data;
+
+  // const mergeData = [
+  //   new Set([
+  //     ...(Array.isArray(filterByStations) ? filterByStations : []),
+  //     ...(Array.isArray(filterByTimePeriod) ? filterByTimePeriod : []),
+  //   ]),
+  // ];
+
+  const mergeData = mergeArraysWithoutDuplicates(
+    filterByStations,
+    filterByTimePeriod
+  );
+
   React.useEffect(() => {
     dispatch(setIsShow(false));
   }, []);
@@ -96,13 +137,21 @@ export default function Home() {
       <WaterQualityChart
         isLoading={isLoading}
         isFetching={isFetching}
-        data={{}}
+        dataWaterQuality={mergeData}
+        dataWaterQualityType={dataWaterQualityType}
+        dataWaterQualityStatus={dataWaterQualityStatus}
+        dataStations={dataStations}
+        setFilterTimePeriodData={setFilterTimePeriodData}
+        setFilterStationsData={setFilterStationsData}
       />
       {/* PARAMETER */}
       <WaterQualityParameter
         isLoading={isLoading}
         isFetching={isFetching}
-        data={{}}
+        dataWaterQuality={dataWaterQuality}
+        dataWaterQualityType={dataWaterQualityType}
+        dataWaterQualityStatus={dataWaterQualityStatus}
+        dataStations={dataStations}
       />
       {/* QUALITY CHART */}
       <Footer />

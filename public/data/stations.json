@@ -1,90 +1,90 @@
 [
   {
-    "station_id": "1",
+    "stations_id": "1",
     "stations_name": "Central West Bay",
     "stations_latitude": "14.631",
     "stations_longgitude": "121.177"
   },
   {
-    "station_id": "2",
+    "stations_id": "2",
     "stations_name": "East Bay",
     "stations_latitude": "14.274",
     "stations_longgitude": "121.353"
   },
   {
-    "station_id": "3",
+    "stations_id": "3",
     "stations_name": "Central Bay",
     "stations_latitude": "14.28",
     "stations_longgitude": "121.25"
   },
   {
-    "station_id": "4",
+    "stations_id": "4",
     "stations_name": "Northern West Bay",
     "stations_latitude": "14.645",
     "stations_longgitude": "121.169"
   },
   {
-    "station_id": "5",
+    "stations_id": "5",
     "stations_name": "South Bay",
     "stations_latitude": "14.247",
     "stations_longgitude": "121.394"
   },
   {
-    "station_id": "6",
+    "stations_id": "6",
     "stations_name": "Taytay",
     "stations_latitude": "14.5588",
     "stations_longgitude": "121.1329"
   },
   {
-    "station_id": "7",
+    "stations_id": "7",
     "stations_name": "San Pedro (West Bay)",
     "stations_latitude": "14.3682697",
     "stations_longgitude": "121.0508165"
   },
   {
-    "station_id": "8",
+    "stations_id": "8",
     "stations_name": "Sta Rosa (West Bay) ",
     "stations_latitude": "14.2843023",
     "stations_longgitude": "121.0888928"
   },
   {
-    "station_id": "9",
+    "stations_id": "9",
     "stations_name": "Fish Sanctuary (Central Bay)",
     "stations_latitude": "14.3",
     "stations_longgitude": "121.2"
   },
   {
-    "station_id": "10",
+    "stations_id": "10",
     "stations_name": "Pagsanjan (East Bay)",
     "stations_latitude": "14.273056",
     "stations_longgitude": "121.453889"
   },
   {
-    "station_id": "11",
+    "stations_id": "11",
     "stations_name": "Muntinlupa",
     "stations_latitude": "14.38333333",
     "stations_longgitude": "121.05"
   },
   {
-    "station_id": "12",
+    "stations_id": "12",
     "stations_name": "GEMS",
     "stations_latitude": "",
     "stations_longgitude": ""
   },
   {
-    "station_id": "13",
+    "stations_id": "13",
     "stations_name": "Cardona",
     "stations_latitude": "",
     "stations_longgitude": ""
   },
   {
-    "station_id": "14",
+    "stations_id": "14",
     "stations_name": "Jala-jala",
     "stations_latitude": "",
     "stations_longgitude": ""
   },
   {
-    "station_id": "15",
+    "stations_id": "15",
     "stations_name": "Lumban",
     "stations_latitude": "",
     "stations_longgitude": ""

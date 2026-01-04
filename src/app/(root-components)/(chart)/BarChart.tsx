@@ -3,6 +3,7 @@ import { numberWithCommasToFixed } from "@/src/components/helper/helper-function
 import LoadingBar from "@/src/components/partials/loading/LoadingBar";
 import { Chart as ChartJS, registerables } from "chart.js";
 import dynamic from "next/dynamic";
+import { getDataByStations } from "../funtions-root";
 
 ChartJS.register(...registerables);
 
@@ -19,41 +20,75 @@ const ChartLoading = dynamic(
   }
 );
 
+// Define an interface or type alias for the props/parameters
+interface MyComponentProps {
+  title: string;
+  measurement: string;
+  barData: any;
+  dataWaterQualityStatus: any;
+  // other props...
+}
+
 const BarChart = ({
   title = "Dissolved Oxygen (DO) Levels",
   measurement = "mg/L",
-}) => {
-  const arrData = Array.from({ length: 6 }).map(
-    (val, i) =>
-      `LLDA-${i + 1 < 10 ? `00${i + 1}` : i + 1 < 100 ? `0${i + 1}` : i + 1}`
-  );
+  barData,
+  dataWaterQualityStatus,
+}: MyComponentProps) => {
+  console.log(dataWaterQualityStatus);
+  const uniqueByKey = (arr: any, key: string) => {
+    const seen = new Set();
+    return arr.filter((item: any) => {
+      const keyValue = item[key];
+      // If the key value hasn't been seen before, add it to the Set and keep the item
+      if (!seen.has(keyValue)) {
+        seen.add(keyValue);
+        return true;
+      }
+      // Otherwise, filter it out (return false)
+      return false;
+    });
+  };
 
-  const arr = Array.from({ length: 6 }).map(() =>
-    Number(Math.random() * 10).toFixed(2)
-  );
+  const arrData = uniqueByKey(barData, "stations_id");
+  const res = getDataByStations(arrData, barData);
+  const arr = arrData.map((item: any) => item);
 
   const arrByStatus = [
     {
       title: `Good (> 5)`,
       bgcolor: `#4CB04F`,
-      data: arr.map((item) => (Number(item) > 5 ? Number(item) : 0)),
+      data: arr.map((item: any) =>
+        Number(item.amount) > 5 ? Number(item.amount) : 0
+      ),
     },
     {
       title: `Moderate (> 2.5 && < 5)`,
       bgcolor: `#FFC107`,
-      data: arr.map((item) =>
-        Number(item) >= 2.5 && Number(item) <= 5 ? Number(item) : 0
+      data: arr.map((item: any) =>
+        Number(item.amount) >= 2.5 && Number(item.amount) <= 5
+          ? Number(item.amount)
+          : 0
       ),
     },
     {
       title: `Poor (< 2.5)`,
       bgcolor: "#F44336",
-      data: arr.map((item) => (Number(item) < 2.5 ? Number(item) : 0)),
+      data: arr.map((item: any) =>
+        Number(item.amount) < 2.5 ? Number(item.amount) : 0
+      ),
     },
   ];
 
   const data = {
-    labels: arrData,
+    labels: arrData.map((item: any) =>
+      item.station_name
+        .replaceAll("(", "")
+        .replaceAll(")", "")
+        .split(" ")
+        .map((w: string) => w[0])
+        .join("")
+    ),
     datasets: arrByStatus.map((item) => {
       return {
         label: item.title,

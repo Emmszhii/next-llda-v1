@@ -4,15 +4,61 @@ import BarChart from "./(chart)/BarChart";
 interface MyComponentProps {
   isLoading: boolean;
   isFetching: boolean;
-  data: object;
+  dataWaterQuality: any;
+  dataWaterQualityType: any;
+  dataWaterQualityStatus: any;
+  dataStations: any;
+  setFilterTimePeriodData: any;
+  setFilterStationsData: any;
   // other props...
 }
 
 export default function WaterQualityChart({
   isLoading,
   isFetching,
-  data,
+  dataWaterQuality,
+  dataWaterQualityType,
+  dataWaterQualityStatus,
+  dataStations,
+  setFilterTimePeriodData,
+  setFilterStationsData,
 }: MyComponentProps) {
+  const handleOnchangeTimePeriod = (e: any) => {
+    const val = e.target.value;
+    const textVal = e.target.options[e.target.selectedIndex].text;
+    setFilterTimePeriodData(val);
+  };
+  const handleOnchangeStations = (e: any) => {
+    const val = e.target.value;
+    const textVal = e.target.options[e.target.selectedIndex].text;
+    setFilterStationsData((prev: any) => {
+      return {
+        ...prev,
+        id: val,
+        name: textVal,
+      };
+    });
+  };
+
+  const dissoveOxygenData = dataWaterQuality.filter(
+    (item: any) => item.water_quality_type == 2
+  );
+  const phData = dataWaterQuality.filter(
+    (item: any) => item.water_quality_type == 4
+  );
+  const bodData = dataWaterQuality.filter(
+    (item: any) => item.water_quality_type == 1
+  );
+  const codData = dataWaterQuality.filter(
+    (item: any) => item.water_quality_type == 1
+  );
+  const ntuData = dataWaterQuality.filter(
+    (item: any) => item.water_quality_type == 8
+  );
+  const nitrateData = dataWaterQuality.filter(
+    (item: any) => item.water_quality_type == 6
+  );
+
   return (
     <>
       <div className="pt-20">
@@ -29,21 +75,35 @@ export default function WaterQualityChart({
           <div className="my-5 mb-10 py-4 px-2 bg-gray-200 w-full flex flex-col lg:flex-row items-start lg:items-center gap-5">
             <div className="relative flex items-center gap-4">
               <label htmlFor="">Time Period</label>
-              <select className="bg-white border rounded-sm">
+              <select
+                className="bg-white border rounded-sm"
+                onChange={handleOnchangeTimePeriod}
+              >
                 <optgroup label="Select time period">
-                  <option value="">Last 1 year</option>
-                  <option value="2">Last 2 year</option>
-                  <option value="3">Last 3 year</option>
+                  <option value="5">Last 5 year</option>
+                  <option value="10">Last 10 year</option>
+                  <option value="15">Last 15 year</option>
                 </optgroup>
               </select>
             </div>
             <div className="relative flex items-center gap-4">
               <label htmlFor="">Compared by</label>
-              <select className="bg-white border rounded-sm">
+              <select
+                className="bg-white border rounded-sm"
+                onChange={handleOnchangeStations}
+              >
                 <optgroup label="Select stations">
-                  <option value="">All Stations</option>
-                  <option value="">San Pablo</option>
-                  <option value="">Alaminos</option>
+                  <option value="">
+                    {isFetching ? "Loading..." : "All Stations"}
+                  </option>
+                  {!isFetching &&
+                    dataStations?.data.map((item: any, key: number) => {
+                      return (
+                        <option key={key} value={item.stations_id}>
+                          {item.stations_name}
+                        </option>
+                      );
+                    })}
                 </optgroup>
               </select>
             </div>
@@ -51,28 +111,52 @@ export default function WaterQualityChart({
           <div>
             <ul className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <li>
-                <BarChart />
+                <BarChart
+                  title="Dissolved Oxygen (DO) Levels"
+                  measurement="mg/L"
+                  barData={dissoveOxygenData}
+                  dataWaterQualityStatus={dataWaterQualityStatus}
+                />
               </li>
               <li>
-                <BarChart title="pH Level Comparison" measurement="pH Units" />
+                <BarChart
+                  title="pH Level Comparison"
+                  measurement="pH Units"
+                  barData={phData}
+                  dataWaterQualityStatus={dataWaterQualityStatus}
+                />
               </li>
               <li>
                 <BarChart
                   title="Biochemical Oxygen Demand (BOD)"
                   measurement="mg/L"
+                  barData={bodData}
+                  dataWaterQualityStatus={dataWaterQualityStatus}
                 />
               </li>
               <li>
                 <BarChart
                   title="Chemical Oxygen Demand (COD)"
                   measurement="mg/L"
+                  barData={codData}
+                  dataWaterQualityStatus={dataWaterQualityStatus}
                 />
               </li>
               <li>
-                <BarChart title="Turbidity Levels" measurement="NTU" />
+                <BarChart
+                  title="Turbidity Levels"
+                  measurement="NTU"
+                  barData={ntuData}
+                  dataWaterQualityStatus={dataWaterQualityStatus}
+                />
               </li>
               <li>
-                <BarChart title="Nitrate Concentration" measurement="mg/L" />
+                <BarChart
+                  title="Nitrate Concentration"
+                  measurement="mg/L"
+                  barData={nitrateData}
+                  dataWaterQualityStatus={dataWaterQualityStatus}
+                />
               </li>
             </ul>
           </div>

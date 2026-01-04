@@ -64,3 +64,13 @@ export const numberWithCommasToFixed = (item: string, x: any) => {
   }
   return result;
 };
+
+export const mergeArraysWithoutDuplicates = (arr1: any, arr2: any) => {
+  const merged = arr1.concat(arr2);
+  const uniqueArray = merged.filter((item: any, index: any) => {
+    // indexOf returns the first occurrence of the item.
+    // If the current index matches the first index, it's not a duplicate.
+    return merged.indexOf(item) === index;
+  });
+  return uniqueArray;
+};

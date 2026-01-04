@@ -67,7 +67,7 @@ const Header = () => {
                   Explore the lake
                 </a>
               </li>
-              {status == "loading" ? (
+              {/* {status == "loading" ? (
                 <li>
                   <div className="w-20 h-6">
                     <LoadingBar />
@@ -97,7 +97,7 @@ const Header = () => {
                 <li>
                   <Link href="/login">Login</Link>
                 </li>
-              )}
+              )} */}
             </ul>
           </div>
         </div>

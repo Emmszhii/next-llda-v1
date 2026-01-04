@@ -4,14 +4,20 @@ import React from "react";
 interface MyComponentProps {
   isLoading: boolean;
   isFetching: boolean;
-  data: object;
+  dataWaterQuality: any;
+  dataWaterQualityType: any;
+  dataWaterQualityStatus: any;
+  dataStations: any;
   // other props...
 }
 
 export default function WaterQualityParameter({
   isLoading,
   isFetching,
-  data,
+  dataWaterQuality,
+  dataWaterQualityType,
+  dataWaterQualityStatus,
+  dataStations,
 }: MyComponentProps) {
   const titleArr = [
     {
