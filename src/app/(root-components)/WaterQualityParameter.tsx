@@ -28,13 +28,13 @@ export default function WaterQualityParameter({
     },
     { title: "pH Level", good: "> 5", moderate: "> 2.5 && 5 <", poor: "< 2.5" },
     { title: "BOD", good: "> 5", moderate: "> 2.5 && 5 <", poor: "< 2.5" },
-    { title: "COD", good: "> 5", moderate: "> 2.5 && 5 <", poor: "< 2.5" },
-    {
-      title: "Turbidity",
-      good: "> 5",
-      moderate: "> 2.5 && 5 <",
-      poor: "< 2.5",
-    },
+    // { title: "COD", good: "> 5", moderate: "> 2.5 && 5 <", poor: "< 2.5" },
+    // {
+    //   title: "Turbidity",
+    //   good: "> 5",
+    //   moderate: "> 2.5 && 5 <",
+    //   poor: "< 2.5",
+    // },
     { title: "Nitrate", good: "> 5", moderate: "> 2.5 && 5 <", poor: "< 2.5" },
   ];
 
@@ -46,7 +46,7 @@ export default function WaterQualityParameter({
         <div className="container">
           <div className="px-6 py-8">
             <div className="font-semibold">
-              <h3 className="text-primary text-2xl">
+              <h3 className="text-primary text-[clamp(18px,3vw,30px)]">
                 Water Quality Parameter Thresholds (DENR Standards)
               </h3>
             </div>

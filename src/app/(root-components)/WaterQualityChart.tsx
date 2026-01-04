@@ -64,10 +64,10 @@ export default function WaterQualityChart({
       <div className="pt-20">
         <div className="container">
           <div className="font-semibold text-center">
-            <h3 className="text-primary text-5xl max-w-200 mx-auto">
+            <h3 className="text-primary text-[clamp(18px,3vw,30px)] max-w-200 mx-auto">
               Water Quality Parameter Comparison Across Stations
             </h3>
-            <p className="max-w-150 mx-auto my-5">
+            <p className="max-w-150 mx-auto my-5 text-[clamp(12px,2.5vw,20px)]">
               Laguna Lake Development Authority Monitoring Stations
             </p>
           </div>

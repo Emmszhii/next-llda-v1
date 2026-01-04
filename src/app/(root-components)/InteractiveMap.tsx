@@ -45,8 +45,10 @@ export default function InteractiveMap({
       <div className="pt-20">
         <div className="container">
           <div className="font-semibold text-center">
-            <h3 className="text-primary text-5xl">Interactive Map</h3>
-            <p className="max-w-150 mx-auto my-5">
+            <h3 className="text-primary text-[clamp(18px,3vw,30px)]">
+              Interactive Map
+            </h3>
+            <p className="max-w-150 mx-auto my-5 text-[clamp(12px,3vw,20px)]">
               Explore water quality data from monitoring stations across Laguna
               Lake. View detailed metrics for each station below.
             </p>

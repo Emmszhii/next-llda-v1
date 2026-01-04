@@ -6,16 +6,16 @@ export default function About() {
       <div className="pt-20" id="about">
         <div className="container">
           <div className="font-semibold text-center">
-            <h3 className="text-primary text-5xl">About</h3>
+            <h3 className="text-primary text-[clamp(18px,3vw,30px)]">About</h3>
           </div>
-          <div className="mt-10">
+          <div className="mt-5 lg:mt-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <img
                 src="/images/about.png"
                 alt="about.png"
                 className="w-full h-full bg-contain"
               />
-              <div className="flex flex-col justify-between gap-4">
+              <div className="flex flex-col justify-between gap-4 text-[clamp(12px,3vw,16px)]">
                 <p>
                   The Laguna Lake Development Authority (LLDA) is a government
                   agency in the Philippines responsible for the sustainable
