@@ -100,6 +100,9 @@ export default function Home() {
         })
         .filter((item: any) => item)
     : dataWaterQuality?.data;
+  const filterByTimePeriodArr = filterStationsData?.id
+    ? filterByStations
+    : filterByTimePeriod;
 
   // const mergeData = [
   //   new Set([
@@ -110,7 +113,7 @@ export default function Home() {
 
   const mergeData = mergeArraysWithoutDuplicates(
     filterByStations,
-    filterByTimePeriod
+    filterByTimePeriodArr
   );
 
   React.useEffect(() => {
