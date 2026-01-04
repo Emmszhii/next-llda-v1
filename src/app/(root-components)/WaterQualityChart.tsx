@@ -134,22 +134,22 @@ export default function WaterQualityChart({
                   dataWaterQualityStatus={dataWaterQualityStatus}
                 />
               </li>
-              <li>
+              {/* <li>
                 <BarChart
                   title="Chemical Oxygen Demand (COD)"
                   measurement="mg/L"
                   barData={codData}
                   dataWaterQualityStatus={dataWaterQualityStatus}
                 />
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <BarChart
                   title="Turbidity Levels"
                   measurement="NTU"
                   barData={ntuData}
                   dataWaterQualityStatus={dataWaterQualityStatus}
                 />
-              </li>
+              </li> */}
               <li>
                 <BarChart
                   title="Nitrate Concentration"

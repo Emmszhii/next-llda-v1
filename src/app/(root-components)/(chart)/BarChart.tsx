@@ -35,7 +35,6 @@ const BarChart = ({
   barData,
   dataWaterQualityStatus,
 }: MyComponentProps) => {
-  console.log(dataWaterQualityStatus);
   const uniqueByKey = (arr: any, key: string) => {
     const seen = new Set();
     return arr.filter((item: any) => {
@@ -52,7 +51,7 @@ const BarChart = ({
 
   const arrData = uniqueByKey(barData, "stations_id");
   const res = getDataByStations(arrData, barData);
-  const arr = arrData.map((item: any) => item);
+  const arr = res.map((item: any) => item);
 
   const arrByStatus = [
     {
@@ -82,7 +81,7 @@ const BarChart = ({
 
   const data = {
     labels: arrData.map((item: any) =>
-      item.station_name
+      item.stations_name
         .replaceAll("(", "")
         .replaceAll(")", "")
         .split(" ")
