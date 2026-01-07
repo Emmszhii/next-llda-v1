@@ -11,7 +11,9 @@ const Footer = () => {
               Monitoring Network
             </span>
             <a
-              href="https://docs.google.com/document/d/1XbCeUw3BKdHBBgpiLM8qAA8N2H7dxFI5en_xkeQD-dU/edit?usp=sharing"
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://docs.google.com/document/d/1coZzcanH7zgXFucXf28Ykvypl4Msb2rfGSUbrR3nP3Y/edit?usp=sharing"
               className="hover:underline w-full lg:w-fit"
             >
               Documentation

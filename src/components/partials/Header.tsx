@@ -58,14 +58,10 @@ const Header = () => {
           >
             <ul className="flex flex-col pt-20 lg:pt-0 lg:flex-row items-center gap-y-5 gap-x-10 cursor-pointer font-semibold h-dvh bg-white lg:bg-transparent lg:h-fit">
               <li className="hover:underline px-2 py-2">
-                <a onClick={handleClick} href="#about">
-                  About
-                </a>
+                <a href="#about">About</a>
               </li>
               <li className="hover:underline px-6 py-2 bg-primary text-white rounded-sm">
-                <a onClick={handleClick} href="#">
-                  Explore the lake
-                </a>
+                <a href="#">Explore the lake</a>
               </li>
               {/* {status == "loading" ? (
                 <li>
