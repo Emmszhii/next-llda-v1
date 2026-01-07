@@ -10,7 +10,10 @@ const Footer = () => {
               Laguna Lake Development Authority © 2025 | Data Source: LLDA
               Monitoring Network
             </span>
-            <a href="#" className="hover:underline w-full lg:w-fit">
+            <a
+              href="https://docs.google.com/document/d/1XbCeUw3BKdHBBgpiLM8qAA8N2H7dxFI5en_xkeQD-dU/edit?usp=sharing"
+              className="hover:underline w-full lg:w-fit"
+            >
               Documentation
             </a>
           </div>
